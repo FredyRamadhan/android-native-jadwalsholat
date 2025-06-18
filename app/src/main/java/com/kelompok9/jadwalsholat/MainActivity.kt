@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.kelompok9.jadwalsholat.ui.screens.DaftarHariIniScreen
 import com.kelompok9.jadwalsholat.ui.screens.DaftarShalatSunnahScreen
 import com.kelompok9.jadwalsholat.ui.screens.HomeScreen
+import com.kelompok9.jadwalsholat.ui.screens.LocationSettingsScreen
 import com.kelompok9.jadwalsholat.ui.theme.JadwalSholatTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,11 +40,17 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 onTodayPrayerClick = { navController.navigate("daftar_hari_ini") },
                                 onShalatSunnahClick = { navController.navigate("daftar_shalat_sunnah") },
-                                onLocationSettingsClick = { /*  */ }
+                                onLocationSettingsClick = { navController.navigate("location_settings") }
                             )
                         }
                         composable("daftar_hari_ini") {
                             DaftarHariIniScreen()
+                        }
+                        composable("location_settings") {
+                            LocationSettingsScreen(
+                                onBackClick = { navController.popBackStack() },
+                                onLocationSelected = { navController.popBackStack() }
+                            )
                         }
                         composable("daftar_shalat_sunnah") {
                             DaftarShalatSunnahScreen()
