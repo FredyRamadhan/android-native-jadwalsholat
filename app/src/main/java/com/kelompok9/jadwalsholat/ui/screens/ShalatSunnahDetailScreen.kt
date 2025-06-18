@@ -18,25 +18,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.kelompok9.jadwalsholat.data.database.ShalatSunnahData
+import com.kelompok9.jadwalsholat.data.models.ShalatSunnahData
+import com.kelompok9.jadwalsholat.data.models.ShalatSunnahDataSource
 import com.kelompok9.jadwalsholat.ui.theme.JadwalSholatTheme
-import com.kelompok9.jadwalsholat.ui.viewmodels.ShalatSunnahViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShalatSunnahDetailScreen(
     shalatSunnahId: Int,
     onBackClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: ShalatSunnahViewModel = viewModel()
+    modifier: Modifier = Modifier
 ) {
-    val selectedShalatSunnah by viewModel.selectedShalatSunnah.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
-    
-    LaunchedEffect(shalatSunnahId) {
-        viewModel.loadShalatSunnahById(shalatSunnahId)
-    }
+    val selectedShalatSunnah = ShalatSunnahDataSource.getShalatSunnahById(shalatSunnahId)
     
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -61,34 +54,23 @@ fun ShalatSunnahDetailScreen(
             )
         }
     ) { innerPadding ->
-        if (isLoading) {
+        selectedShalatSunnah?.let { shalatSunnah ->
+            ShalatSunnahDetailContent(
+                shalatSunnah = shalatSunnah,
+                modifier = Modifier.padding(innerPadding)
+            )
+        } ?: run {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            selectedShalatSunnah?.let { shalatSunnah ->
-                ShalatSunnahDetailContent(
-                    shalatSunnah = shalatSunnah,
-                    modifier = Modifier.padding(innerPadding)
+                Text(
+                    text = "Data tidak ditemukan",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
-            } ?: run {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Data tidak ditemukan",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
             }
         }
     }

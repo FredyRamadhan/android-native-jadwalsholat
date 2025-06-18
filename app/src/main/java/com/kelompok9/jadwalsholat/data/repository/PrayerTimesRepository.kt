@@ -125,11 +125,27 @@ class PrayerTimesRepository(
     }
     
     /**
-     * Convert API prayer schedule to UI prayer times list
+     * Convert API prayer schedule to UI prayer times list (5 main prayers only)
      */
     fun convertToPrayerTimesList(schedule: PrayerSchedule): List<PrayerTime> {
         return listOf(
             PrayerTime("Subuh", schedule.subuh, "الفجر"),
+            PrayerTime("Dzuhur", schedule.dzuhur, "الظهر"),
+            PrayerTime("Ashar", schedule.ashar, "العصر"),
+            PrayerTime("Maghrib", schedule.maghrib, "المغرب"),
+            PrayerTime("Isya", schedule.isya, "العشاء")
+        )
+    }
+
+    /**
+     * Convert API prayer schedule to ALL prayer times including imsak, dhuha, terbit
+     */
+    fun convertToAllPrayerTimesList(schedule: PrayerSchedule): List<PrayerTime> {
+        return listOf(
+            PrayerTime("Imsak", schedule.imsak, "الإمساك"),
+            PrayerTime("Subuh", schedule.subuh, "الفجر"),
+            PrayerTime("Terbit", schedule.terbit, "الشروق"),
+            PrayerTime("Dhuha", schedule.dhuha, "الضحى"),
             PrayerTime("Dzuhur", schedule.dzuhur, "الظهر"),
             PrayerTime("Ashar", schedule.ashar, "العصر"),
             PrayerTime("Maghrib", schedule.maghrib, "المغرب"),

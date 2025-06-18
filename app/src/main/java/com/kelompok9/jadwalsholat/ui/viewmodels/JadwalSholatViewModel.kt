@@ -55,7 +55,7 @@ class JadwalSholatViewModel(application: Application) : AndroidViewModel(applica
 
             repository.getPrayerTimes(selectedLocation.cityId, date)
                 .onSuccess { prayerData ->
-                    val prayerTimesList = repository.convertToPrayerTimesList(prayerData.jadwal)
+                    val prayerTimesList = repository.convertToAllPrayerTimesList(prayerData.jadwal)
 
                     // Update new state
                     _prayerTimesState.value = PrayerTimesState.Success(
@@ -98,7 +98,10 @@ class JadwalSholatViewModel(application: Application) : AndroidViewModel(applica
      * Get appropriate icon for each prayer
      */
     private fun getPrayerIcon(prayerName: String) = when (prayerName.lowercase()) {
+        "imsak" -> Icons.Default.NightsStay
         "subuh" -> Icons.Default.WbSunny
+        "terbit" -> Icons.Default.WbSunny
+        "dhuha" -> Icons.Default.Brightness6
         "dzuhur" -> Icons.Default.Brightness6
         "ashar" -> Icons.Default.Brightness3
         "maghrib" -> Icons.Default.Brightness3

@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.kelompok9.jadwalsholat.data.database.ShalatSunnahData
+import com.kelompok9.jadwalsholat.data.models.ShalatSunnahData
 import com.kelompok9.jadwalsholat.ui.theme.JadwalSholatTheme
 
 // Legacy data class for backward compatibility
