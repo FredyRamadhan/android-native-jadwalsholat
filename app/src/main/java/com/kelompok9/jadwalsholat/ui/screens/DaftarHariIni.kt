@@ -74,7 +74,7 @@ fun DaftarHariIniScreen(
             DateTimeDisplay()
             Spacer(modifier = Modifier.height(16.dp))
 
-            when (prayerTimesState) {
+            when (val currentState = prayerTimesState) {
                 is PrayerTimesState.Loading -> {
                     LoadingContent()
                 }
@@ -82,14 +82,14 @@ fun DaftarHariIniScreen(
                 is PrayerTimesState.Success -> {
                     SuccessContent(
                         prayerTimes = prayerTimes,
-                        location = prayerTimesState.location,
-                        date = prayerTimesState.date
+                        location = currentState.location,
+                        date = currentState.date
                     )
                 }
 
                 is PrayerTimesState.Error -> {
                     ErrorContent(
-                        message = prayerTimesState.message,
+                        message = currentState.message,
                         onRetry = { jadwalSholatViewModel.loadPrayerTimes() }
                     )
                 }

@@ -140,7 +140,7 @@ fun LocationSettingsScreen(
             )
             
             // Cities list
-            when (citiesState) {
+            when (val currentCitiesState = citiesState) {
                 is CitiesState.Loading -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -155,12 +155,12 @@ fun LocationSettingsScreen(
                         }
                     }
                 }
-                
+
                 is CitiesState.Success -> {
-                    val filteredCities = citiesState.cities.filter { city ->
+                    val filteredCities = currentCitiesState.cities.filter { city ->
                         city.lokasi.contains(searchQuery, ignoreCase = true)
                     }
-                    
+
                     LazyColumn {
                         items(filteredCities) { city ->
                             CityItem(
@@ -174,7 +174,7 @@ fun LocationSettingsScreen(
                         }
                     }
                 }
-                
+
                 is CitiesState.Error -> {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
@@ -194,7 +194,7 @@ fun LocationSettingsScreen(
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = citiesState.message,
+                                text = currentCitiesState.message,
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onErrorContainer,
                                 textAlign = TextAlign.Center

@@ -104,7 +104,8 @@ class LocationSettingsViewModel(application: Application) : AndroidViewModel(app
                     )
 
                     // Find the city name from the loaded cities
-                    val cities = (_citiesState.value as? CitiesState.Success)?.cities
+                    val currentCitiesState = _citiesState.value
+                    val cities = (currentCitiesState as? CitiesState.Success)?.cities
                     val selectedCity = cities?.find { it.id == nearestCityId }
 
                     if (selectedCity != null) {
