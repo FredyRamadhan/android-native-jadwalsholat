@@ -49,7 +49,7 @@ fun DaftarShalatSunnahScreen(
             )
 
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(1.dp)
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 items(shalatSunnahList) { shalat ->
                     ShalatSunnahItem(

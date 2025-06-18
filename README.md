@@ -1,45 +1,30 @@
-# Jadwal Sholat App
+# 🕌 Jadwal Sholat - Modern Prayer Times App
 
-A modern Android application for displaying Islamic prayer times with real-time data from MyQuran API.
+A clean, minimalistic Android application for prayer times and sunnah prayer information, built with Jetpack Compose and Material Design 3.
 
-## Features
+## ✨ Features
 
-### ✅ Implemented Features
+### 🕐 **Enhanced Prayer Times**
+- **8 Prayer Times**: Imsak, Subuh, Terbit, Dhuha, Dzuhur, Ashar, Maghrib, Isya
+- **Real-time API**: Live data from MyQuran API
+- **Location Support**: Manual city selection + GPS location
+- **Clean UI**: Modern card-based design with custom colors
 
-1. **Real-time Prayer Times**
-   - Fetches live prayer times from MyQuran API (https://api.myquran.com/)
-   - Displays 5 daily prayers: Subuh, Dzuhur, Ashar, Maghrib, Isya
-   - Shows prayer times with modern, beautiful UI design
+### 🕌 **Comprehensive Sunnah Prayer Guide**
+- **9 Complete Prayers**: Dhuha, Rawatib, Tahajjud, Witir, etc.
+- **Detailed Information**:
+  - Arabic intentions (niat)
+  - Timing guidelines
+  - Spiritual benefits
+  - Islamic evidence (dalil with Quranic verses & Hadith)
+- **Enhanced UI**: Larger cards with better separation
+- **Click-to-detail**: Full information screens
 
-2. **Location Settings**
-   - Choose from 500+ Indonesian cities
-   - Search functionality for easy city selection
-   - **Fixed**: Proper location permission handling with user prompts
-   - **Fixed**: Accurate device location detection using GPS
-   - Persistent location storage using DataStore
-
-3. **Sunnah Prayer Database**
-   - **New**: SQLite database with Room for sunnah prayer data
-   - **New**: Comprehensive sunnah prayer information (nama, deskripsi, niat, waktu, manfaat)
-   - **New**: Click-to-detail navigation for each sunnah prayer
-   - **New**: Detailed screens showing complete prayer information
-   - Pre-populated with 9 common sunnah prayers
-
-4. **Modern UI/UX**
-   - Material Design 3 components
-   - Loading states with progress indicators
-   - Error handling with retry functionality
-   - Enhanced card layouts with icons
-   - **New**: Minimal list view with click-to-detail pattern
-   - **New**: Comprehensive detail screens for sunnah prayers
-   - Responsive design
-
-5. **Data Management**
-   - Repository pattern for clean architecture
-   - Retrofit for API communication
-   - **New**: Room database for local sunnah prayer data
-   - DataStore for location preferences
-   - StateFlow for reactive UI updates
+### 🎨 **Professional Design**
+- **Custom Colors**: #353A47, #82AEB1, #F7EBEC, #D33F49
+- **Minimalistic**: Clean, professional appearance
+- **Consistent**: Unified design language throughout
+- **Responsive**: Optimized for different screen sizes
 
 ## Technical Implementation
 
