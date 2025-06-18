@@ -14,20 +14,31 @@ A modern Android application for displaying Islamic prayer times with real-time 
 2. **Location Settings**
    - Choose from 500+ Indonesian cities
    - Search functionality for easy city selection
-   - Option to use device's current location (with fallback)
+   - **Fixed**: Proper location permission handling with user prompts
+   - **Fixed**: Accurate device location detection using GPS
    - Persistent location storage using DataStore
 
-3. **Modern UI/UX**
+3. **Sunnah Prayer Database**
+   - **New**: SQLite database with Room for sunnah prayer data
+   - **New**: Comprehensive sunnah prayer information (nama, deskripsi, niat, waktu, manfaat)
+   - **New**: Click-to-detail navigation for each sunnah prayer
+   - **New**: Detailed screens showing complete prayer information
+   - Pre-populated with 9 common sunnah prayers
+
+4. **Modern UI/UX**
    - Material Design 3 components
    - Loading states with progress indicators
    - Error handling with retry functionality
    - Enhanced card layouts with icons
+   - **New**: Minimal list view with click-to-detail pattern
+   - **New**: Comprehensive detail screens for sunnah prayers
    - Responsive design
 
-4. **Data Management**
+5. **Data Management**
    - Repository pattern for clean architecture
    - Retrofit for API communication
-   - DataStore for local data persistence
+   - **New**: Room database for local sunnah prayer data
+   - DataStore for location preferences
    - StateFlow for reactive UI updates
 
 ## Technical Implementation
@@ -65,6 +76,12 @@ implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
 // Location Services
 implementation("com.google.android.gms:play-services-location:21.0.1")
+implementation("com.google.accompanist:accompanist-permissions:0.32.0")
+
+// Database
+implementation("androidx.room:room-runtime:2.6.1")
+implementation("androidx.room:room-ktx:2.6.1")
+kapt("androidx.room:room-compiler:2.6.1")
 
 // Data Storage
 implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -92,6 +109,19 @@ implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
    - Exact time in local format
    - Appropriate icons for each prayer
    - Location and date information
+
+### Exploring Sunnah Prayers
+1. Tap "Daftar Shalat Sunnah" from the main menu
+2. Browse through 9 comprehensive sunnah prayers
+3. Each item shows:
+   - Prayer name
+   - Brief description (truncated)
+   - Recommended time
+4. Tap any item to view detailed information including:
+   - Complete description
+   - Prayer intention (niat) in Arabic
+   - Detailed timing guidelines
+   - Spiritual benefits and rewards
 
 ## API Integration
 

@@ -20,6 +20,7 @@ import com.kelompok9.jadwalsholat.ui.screens.DaftarHariIniScreen
 import com.kelompok9.jadwalsholat.ui.screens.DaftarShalatSunnahScreen
 import com.kelompok9.jadwalsholat.ui.screens.HomeScreen
 import com.kelompok9.jadwalsholat.ui.screens.LocationSettingsScreen
+import com.kelompok9.jadwalsholat.ui.screens.ShalatSunnahDetailScreen
 import com.kelompok9.jadwalsholat.ui.theme.JadwalSholatTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,14 +47,25 @@ class MainActivity : ComponentActivity() {
                         composable("daftar_hari_ini") {
                             DaftarHariIniScreen()
                         }
+                        composable("daftar_shalat_sunnah") {
+                            DaftarShalatSunnahScreen(
+                                onShalatSunnahClick = { shalatSunnahId ->
+                                    navController.navigate("shalat_sunnah_detail/$shalatSunnahId")
+                                }
+                            )
+                        }
                         composable("location_settings") {
                             LocationSettingsScreen(
                                 onBackClick = { navController.popBackStack() },
                                 onLocationSelected = { navController.popBackStack() }
                             )
                         }
-                        composable("daftar_shalat_sunnah") {
-                            DaftarShalatSunnahScreen()
+                        composable("shalat_sunnah_detail/{shalatSunnahId}") { backStackEntry ->
+                            val shalatSunnahId = backStackEntry.arguments?.getString("shalatSunnahId")?.toIntOrNull() ?: 0
+                            ShalatSunnahDetailScreen(
+                                shalatSunnahId = shalatSunnahId,
+                                onBackClick = { navController.popBackStack() }
+                            )
                         }
 
                     }

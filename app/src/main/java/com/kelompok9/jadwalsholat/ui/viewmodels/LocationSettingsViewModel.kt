@@ -86,8 +86,7 @@ class LocationSettingsViewModel(application: Application) : AndroidViewModel(app
         viewModelScope.launch {
             try {
                 if (!locationHelper.hasLocationPermission()) {
-                    // For now, default to Jakarta if no permission
-                    // In a real app, you would request permission first
+                    // Permission not granted, fallback to Jakarta
                     repository.saveSelectedLocation(
                         cityId = "1301",
                         cityName = "KOTA JAKARTA",
@@ -111,7 +110,7 @@ class LocationSettingsViewModel(application: Application) : AndroidViewModel(app
                     if (selectedCity != null) {
                         selectCity(selectedCity)
                     } else {
-                        // Fallback to Jakarta
+                        // Fallback to Jakarta if city not found
                         repository.saveSelectedLocation(
                             cityId = "1301",
                             cityName = "KOTA JAKARTA",
@@ -119,15 +118,22 @@ class LocationSettingsViewModel(application: Application) : AndroidViewModel(app
                         )
                     }
                 } else {
-                    // Fallback to Jakarta
+                    // Location is null, fallback to Jakarta
                     repository.saveSelectedLocation(
                         cityId = "1301",
                         cityName = "KOTA JAKARTA",
                         region = "DKI JAKARTA"
                     )
                 }
+            } catch (e: SecurityException) {
+                // Permission denied, fallback to Jakarta
+                repository.saveSelectedLocation(
+                    cityId = "1301",
+                    cityName = "KOTA JAKARTA",
+                    region = "DKI JAKARTA"
+                )
             } catch (e: Exception) {
-                // Fallback to Jakarta on any error
+                // Any other error, fallback to Jakarta
                 repository.saveSelectedLocation(
                     cityId = "1301",
                     cityName = "KOTA JAKARTA",
